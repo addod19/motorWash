@@ -1,0 +1,28 @@
+.d-flex {
+    display: flex;
+}
+.headerContainer {
+    height: 20vh;
+    width: 100%;
+    background-color: #2a2a32;
+}
+.logoContainer {
+    border: 1px solid white;
+    width: 40%;
+}
+
+.actionsContainer {
+    border: 1px solid white;
+    width: 60%;
+}
+
+@media (max-width: 750px) {
+    .headerContainer {
+        flex-direction: column;
+    }
+
+    .logoContainer,
+    .actionsContainer {
+        width: 100vw;
+    }
+}
