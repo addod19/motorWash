@@ -2,8 +2,8 @@ class UsersController < ApplicationController
   before_action :authorized, only: [:auto_login]
 
   def create
-    @user = User.create(user_params)
-    if @user.valid?
+    @user = User.new(user_params)
+    if @user.save!
       token = encoded_token({user_id: @user.id})
       render json: { user: @user, token: token }
     else
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(cname, email, password_digest, address1, address2, mobile, location)
+    params.permit(:cname, :email, :password, :password_confirmation, :address1, :address2, :mobile, :location)
   end
 
 end
