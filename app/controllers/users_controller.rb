@@ -25,6 +25,11 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+  def logout
+    user[:user_id] = nil
+    redirect_to login_path
+  end
+
   private
 
   def user_params
