@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import { signupUser } from '../../redux/actions/signupActions';
 
-const Signup = ({ signupUser, authenticated: loggedIn }) => {
-
+const Signup = ({ signupUser, loggedIn }) => {
   const [signupData, setSignupData] = useState({
-    cname: 'Addo',
+    cname: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -15,14 +15,18 @@ const Signup = ({ signupUser, authenticated: loggedIn }) => {
     location: '',
   });
 
-  const { cname, email, password, password_confirmation, address1, address2, mobile, location } = signupData;
+  const { cname, email, password, address1, address2, mobile, location } = signupData;
 
-  const handleChange = (e) => setSignupData({ ...signupData, [e.target.name]: e.target.value }, console.log(e.target.value));
+  const handleChange = (e) => setSignupData({ ...signupData, [e.target.name]: e.target.value });
 
   const handleSubmit = async evt => {
     evt.preventDefault();
     signupUser(signupData);
   };
+
+  if (loggedIn) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <form>
@@ -48,17 +52,9 @@ const Signup = ({ signupUser, authenticated: loggedIn }) => {
         <input type="password"
           placeholder="Password"
           value={password} name="password"
-          onChange={handleChange}
+          onChange={handleChange} autoComplete="on"
         />
       </div>
-      {/* <div className="password-confirmation-wrap">
-        <label>Password Confirmation</label>
-        <input type="password"
-          placeholder="Password Confirmation"
-          value={password} name="password_confimation"
-          onChange={handleChange}
-        />
-      </div> */}
       <div className="address1-wrap">
         <label>Address 1</label>
         <input type="text"
@@ -103,7 +99,7 @@ const Signup = ({ signupUser, authenticated: loggedIn }) => {
 }
 
 const mapStateToProps = state => ({
-  authenticated: state.auth,
+  loggedIn: state.loggedIn,
 });
 
 export default connect(mapStateToProps, { signupUser })(Signup);
