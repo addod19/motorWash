@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { Navigate } from 'react-router-dom';
-import { signupUser } from '../../redux/actions/signupActions';
 
-const Signup = ({ signupUser, loggedIn }) => {
+const Signup = () => {
   const [signupData, setSignupData] = useState({
     cname: '',
     email: '',
@@ -21,12 +18,8 @@ const Signup = ({ signupUser, loggedIn }) => {
 
   const handleSubmit = async evt => {
     evt.preventDefault();
-    signupUser(signupData);
+    console.log(evt);
   };
-
-  if (loggedIn) {
-    return <Navigate to="/" />;
-  }
 
   return (
     <form>
@@ -91,15 +84,11 @@ const Signup = ({ signupUser, loggedIn }) => {
         <button type="submit"
           onClick={handleSubmit}
         >
-          Submit
+          Register
         </button>
       </div>
     </form>
   );
 }
 
-const mapStateToProps = state => ({
-  loggedIn: state.loggedIn,
-});
-
-export default connect(mapStateToProps, { signupUser })(Signup);
+export default Signup;
