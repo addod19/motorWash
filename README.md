@@ -6,10 +6,10 @@ This project is a real world application solving the problem of car maintenance.
 
 This application is in two faces; Ruby on Rails API backend and a React Client Application. 
 - `Git clone the application`
-- `bundle install app ruby gems in the application`
+- `bundle install ruby gems in the application`
 - `create a database and tables -> rails db:create db:migrate`
 - `run the API server -> rails s and it will be on http://localhost:3000`
-- `next we nagicate into the motorwash-client direcotry`
+- `next we navigate into the motorwash-client direcotry`
 - `run npm i to install all the packages`
 - `run npm start to start the UI`
 
