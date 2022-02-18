@@ -1,24 +1,49 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const Signup = () => {
-  const [signupData, setSignupData] = useState({
+  const [clientData, setClientData] = useState({
     cname: '',
     email: '',
     password: '',
-    password_confirmation: '',
     address1: '',
     address2: '',
     mobile: '',
     location: '',
   });
 
-  const { cname, email, password, address1, address2, mobile, location } = signupData;
+  const { cname, email, password, address1, address2, mobile, location } = clientData;
 
-  const handleChange = (e) => setSignupData({ ...signupData, [e.target.name]: e.target.value });
+  const makeAPICall = async (clientData) => {
+    
+  }
+
+  const handleChange = (e) => setClientData({ ...clientData, [e.target.name]: e.target.value });
 
   const handleSubmit = async evt => {
     evt.preventDefault();
-    console.log(evt);
+    console.log("evt fired");
+    // const clientRequest = await makeAPICall();
+    // console.log(clientRequest);
+    // console.log("after api call");
+    const apiConfig = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(clientData),
+    };
+
+    try {
+      const url = "http://127.0.0.1:3000";
+      const res = await axios.post(`${url}/users`, clientData, apiConfig);
+      console.log(res.data);
+      if (res) setClientData(res.data);
+      localStorage.setItem('clients', res.data.token);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
