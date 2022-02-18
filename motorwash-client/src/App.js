@@ -16,6 +16,14 @@ const App = () => {
             <Route exact path="/" element={<Home/>} />
             <Route exact path="/users" element={<Signup/>} />
             <Route exact path="/login" element={<Login/>} />
+            <Route
+              path="*"
+              element={
+                <main style={{ padding: "1rem" }}>
+                  <p>Oooooooopss!!!! Error displaying routes</p>
+                </main>
+              }
+            />
             {/* Services */}
             {/* Who we are */}
             {/* Pricing */}
